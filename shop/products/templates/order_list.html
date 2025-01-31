@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Orders</h1>
+<ul>
+    {% for order in orders %}
+    <li>
+        <strong>Order {{ order.id }}:</strong>
+        <p>Total Price: ${{ order.total_price }}</p>
+        <p>Ordered on: {{ order.created_at }}</p>
+        <ul>
+            {% for product in order.product.all %}
+            <li>{{ product.name }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% empty %}
+    <p>You have no orders yet.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'product_list' %}">Browse Products</a>
+{% endblock %}
